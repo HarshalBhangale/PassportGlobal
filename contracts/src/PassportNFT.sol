@@ -17,6 +17,9 @@ contract PassportGlobal is ERC721 {
   constructor() ERC721("PassportGlobal", "PPG") {}
 
   /** External functions */
+  function mint() external {
+    safeMint(msg.sender);
+  }
 
   /** Internal/Private functions */
   function safeMint(address to) internal {
