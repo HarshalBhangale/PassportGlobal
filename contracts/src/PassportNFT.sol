@@ -1,16 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {Counters} from "@openzeppelin/contracts/utils/Counters.sol";
 
 contract PassportGlobal is ERC721 {
   using Counters for Counters.Counter;
 
   /** Errors */
   error PassportGlobal__NotTransferable();
+  error PassportGlobal__AddressCanOnlyMintOnce(address addr);
 
+  /** State variables */
   Counters.Counter private _tokenIdCounter;
 
   /** constructor */
@@ -18,6 +19,9 @@ contract PassportGlobal is ERC721 {
 
   /** External functions */
   function mint() external {
+    if (balanceOf(msg.sender) > 0) {
+      revert PassportGlobal__AddressCanOnlyMintOnce(msg.sender);
+    }
     safeMint(msg.sender);
   }
 
