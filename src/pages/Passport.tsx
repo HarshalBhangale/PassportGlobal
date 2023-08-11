@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAccount } from 'wagmi';
 import { usePassportGlobalGetPassport, usePassportGlobalGetPassportId, usePassportGlobalHasPassport } from '../generated';
 import { StampListing } from '../components/StampListing';
+import { WorldCoinConnect } from '../components/WorldCoinConnect';
 
 export function PassportPage() {
   const account = useAccount();
@@ -28,6 +29,11 @@ export function PassportPage() {
       return (
         <div className="text-center max-w-92">
           <div className="relative mx-auto">
+
+            <div>
+              <WorldCoinConnect />
+            </div>
+
             <img src="https://res.cloudinary.com/diwycpzwa/image/upload/v1691740929/PassportGlobal/passport.png" alt="" className="inline-block" />
             <div className="text-black absolute" style={{ left: '0', right: '0', top: '150px' }}>Issued on {dateStr}</div>
             <div className="text-white absolute" style={{ left: '0', right: '0', bottom: '33px' }}>
@@ -36,7 +42,7 @@ export function PassportPage() {
             </div>
           </div>
           <div className="text-black bg-yellow-200 inline-block max-w-92">
-            <StampListing address={account.address}/>
+            <StampListing address={account.address} />
           </div>
           <div className="mt-10 mb-10">
             <button className="btn bg-black text-white border-purple-500 border-4 w-48" onClick={() => navigate('/qr-make')}>Request a Stamp</button>
