@@ -7,7 +7,7 @@ export function QRMakePage() {
     <>
       <Locator />
       <div className="text-center mt-10">
-        <button className="btn bg-yellow-400 text-black" onClick={() => navigate('/')}>Go Back</button>
+        <button className="btn bg-yellow-400 text-black" onClick={() => navigate('/')}>Back to My Passport</button>
       </div>
     </>
   );

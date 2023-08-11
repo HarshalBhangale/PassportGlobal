@@ -1,35 +1,29 @@
-import { useState, useEffect } from 'react'
-import { Loader } from "@googlemaps/js-api-loader"
+import { useState } from 'react'
+import { useAccount } from 'wagmi';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import QRCode from 'react-qr-code';
-
-const loader = new Loader({
-  apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-  version: "weekly",
-});
+import { GooglePlacesAPI } from './GooglePlacesAPI';
 
 export function Locator() {
+  const account = useAccount();
   const [query, setQuery] = useState('');
-  const [imported, setImported] = useState(false);
   const [value, setValue] = useState(null);
-  useEffect(() => {
-    loader.importLibrary("places").then((api) => {
-      setImported(true);
-    });
-  }, []);
   async function selectAddress(address: string) {
     const [result] = await geocodeByAddress(address);
-    setValue(await getLatLng(result));
+    const { lat, lng } = await getLatLng(result);
+    setValue({ lat, lng });
   }
   function makeUrl() {
     const { lat, lng } = value;
-    return `${window.location.origin}/qr-scan?lat=${lat}&lng=${lng}`;
-  }
-  if (!imported) {
-    return <div>Loading...</div>;
+    const url = new URL(`${window.location.origin}/qr-scan`);
+    url.searchParams.set('target', account.address);
+    url.searchParams.set('place', query);
+    url.searchParams.set('lat', lat);
+    url.searchParams.set('lng', lng);
+    return url.toString();
   }
   return (
-    <>
+    <GooglePlacesAPI>
       <label className="label">Search for a place:</label>
       <PlacesAutocomplete
         value={query}
@@ -65,11 +59,9 @@ export function Locator() {
             <a href={makeUrl()} target="_blank" className="inline-block bg-white p-5 mb-5">
               <QRCode className="mx-auto" value={makeUrl()} />
             </a>
-            <div>Latitude: {value.lat}</div>
-            <div>Longitude: {value.lng}</div>
           </div>
         )
       }
-    </>
+    </GooglePlacesAPI>
   );
 }
