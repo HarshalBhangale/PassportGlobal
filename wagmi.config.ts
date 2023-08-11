@@ -32,6 +32,10 @@ export default defineConfig({
           [chains.optimismGoerli.id]: ATTESTATION_STATION_ADDRESS,
           [chains.foundry.id]: ATTESTATION_STATION_ADDRESS,
         },
+        PassportGlobal: {
+          [chains.optimismGoerli.id]:
+            "0x24e1175b359198573019e4331a117ef2e15a80d0",
+        },
       },
     }),
     /**
