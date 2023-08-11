@@ -7,6 +7,9 @@ import { WagmiConfig } from "wagmi";
 import { App } from "./App";
 import { chains, config } from "./wagmi";
 
+import { BrowserRouter } from "react-router-dom";
+
+
 /**
  * Root providers and initialization of app
  * @see https://reactjs.org/docs/strict-mode.html
@@ -17,7 +20,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <WagmiConfig config={config}>
       <RainbowKitProvider chains={chains}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </RainbowKitProvider>
     </WagmiConfig>
   </React.StrictMode>,
