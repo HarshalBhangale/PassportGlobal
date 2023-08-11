@@ -3,8 +3,9 @@ pragma solidity ^0.8.9;
 
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Counters} from "@openzeppelin/contracts/utils/Counters.sol";
+import {StampAttester} from "./StampAttester.sol";
 
-contract PassportGlobal is ERC721 {
+contract PassportGlobal is ERC721, StampAttester {
   using Counters for Counters.Counter;
 
   /** Type declarations */
@@ -25,7 +26,13 @@ contract PassportGlobal is ERC721 {
   mapping(uint256 => User) private PassportIdToUser;
 
   /** constructor */
-  constructor() ERC721("PassportGlobal", "PPG") {
+  constructor()
+    ERC721("PassportGlobal", "PPG")
+    StampAttester(
+      0x4200000000000000000000000000000000000021, // TODO: make this dymamic
+      0x4cd28cb0df7781390ccdf919b8854daa9e34ebbe6e2f7724980b7f0ddbb38ed3 // TODO: make dynamic too
+    )
+  {
     // reserve token id 0 for no passport
     _tokenIdCounter.increment();
   }
