@@ -5,7 +5,7 @@ export function CreatePassportPage() {
 
   return (
     <>
-      <div className="w-full  bg-indigo-950 flex justify-center"
+      <div className="w-full bg-indigo-950 flex justify-center"
         style={{ height: "100vh" }}>
 
         <div className="grid grid-flow-row auto-rows-min">
@@ -43,7 +43,6 @@ export function CreatePassportPage() {
             </div>
           </div>
         </div>
-
 
       </div>
     </>

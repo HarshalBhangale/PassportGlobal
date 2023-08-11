@@ -4,17 +4,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAccount } from "wagmi";
 
 export function LandingPage() {
-
   const { isConnected } = useAccount();
   const navigate = useNavigate();
-  const location = useLocation();
-
   useEffect(() => {
     if (isConnected) {
       navigate("/passport");
     }
   }, [isConnected])
-
   return (
     <>
       <div className="flex flex-row mb-10">
