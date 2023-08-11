@@ -56,7 +56,8 @@ export function Locator() {
       </PlacesAutocomplete>
       {
         value && (
-          <div className="text-center mt-20 mb-10">
+          <div className="text-center mt-10 mb-10">
+            <div className="mb-5">Let someone else to <span className="text-green-400">scan</span> this QR code in order to <span className="text-purple-400">grant</span> you a stamp</div>
             <a href={makeUrl()} target="_blank" className="inline-block bg-white p-5 mb-5">
               <QRCode className="mx-auto" value={makeUrl()} />
             </a>
