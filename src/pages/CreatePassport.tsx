@@ -39,7 +39,7 @@ export function CreatePassportPage() {
 
           <div className="row my-10">
             <div className="flex justify-center">
-              <button className="px-10 py-3" style={{ borderRadius: "15px", backgroundColor: "yellow", fontSize: "20px", fontWeight: "bold" }}>Create Passport</button>
+              <button className="px-10 py-3" style={{ borderRadius: "15px", backgroundColor: "yellow", fontSize: "20px", fontWeight: "bold", color: "black" }}>Create Passport</button>
             </div>
           </div>
         </div>
