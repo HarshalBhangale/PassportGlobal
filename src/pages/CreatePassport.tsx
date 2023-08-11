@@ -41,10 +41,10 @@ export function CreatePassportPage() {
                 <div className="form-control mb-4">
                   <textarea placeholder="A few words about you…" value={bio} required className="textarea" onChange={(e) => setBio(e.target.value)}></textarea>
                 </div>
-                <div className="form-control mb-4">
+                {/* <div className="form-control mb-4">
                   <label htmlFor="profile-picture" className="label">Profile Picture</label>
                   <input type="file" required className="file-input" />
-                </div>
+                </div> */}
               </form>
             </div>
           </div>
