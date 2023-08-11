@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useAccount } from 'wagmi';
-import { usePassportGlobalGetPassport, usePassportGlobalHasPassport } from '../generated';
+import { usePassportGlobalGetPassport, usePassportGlobalGetPassportId, usePassportGlobalHasPassport } from '../generated';
 
 export function PassportPage() {
   const account = useAccount();
@@ -10,6 +10,9 @@ export function PassportPage() {
     args: [account.address!],
   });
   const { data: passport, isLoading: passportLoading } = usePassportGlobalGetPassport({
+    args: [account.address!],
+  });
+  const { data: passportId, isLoading: passportIdLoading } = usePassportGlobalGetPassportId({
     args: [account.address!],
   });
   useEffect(() => {
@@ -28,7 +31,7 @@ export function PassportPage() {
             <div className="text-black text-center absolute" style={{ left: '0', right: '0', top: '150px' }}>Issued on {dateStr}</div>
             <div className="text-white text-center absolute" style={{ left: '0', right: '0', bottom: '33px' }}>
               <div>{name}</div>
-              <div>ID: {account.address?.substr(-8)}</div>
+              <div>ID: {Number(passportId)}</div>
             </div>
           </div>
           <div className="mt-10">
