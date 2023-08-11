@@ -12,11 +12,13 @@ export function Layout() {
       <div className="container mx-auto px-4">
         {
           account.isConnected &&
-          <div className="m-5" style={{ float: "right", right: "15px" }}>
+          <div className="m-5 float-right">
             <ConnectButton />
           </div>
         }
-        <Outlet />
+        <div className="clear-both">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

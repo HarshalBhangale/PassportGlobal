@@ -10,7 +10,7 @@ import { CreatePassportPage } from "./pages/CreatePassport";
 
 export function App() {
   const account = useAccount();
-  if (account.isConnected) {
+  if (account.isConnected && !account.isConnecting) {
     return (
       <>
         <Routes>

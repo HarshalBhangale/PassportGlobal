@@ -1,16 +1,6 @@
-import React, { useEffect } from 'react';
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useAccount } from "wagmi";
 
 export function LandingPage() {
-  const { isConnected } = useAccount();
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (isConnected) {
-      navigate("/passport");
-    }
-  }, [isConnected])
   return (
     <>
       <div className="flex flex-row mb-10">
