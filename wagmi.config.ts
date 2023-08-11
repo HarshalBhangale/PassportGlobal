@@ -34,7 +34,7 @@ export default defineConfig({
         },
         PassportGlobal: {
           [chains.optimismGoerli.id]:
-            "0x24e1175b359198573019e4331a117ef2e15a80d0",
+            "0x0D10F720B5854704A311DB07C39F872847e0Bb56",
         },
       },
     }),
