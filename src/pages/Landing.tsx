@@ -28,7 +28,7 @@ export function LandingPage() {
           <div className="inline-block max-w-prose">🛫 Travel the WorldExplore <span className="text-green-500">hidden gems</span> and renowned landmarks. Every <span className="text-purple-500">journey has a story</span>, and every story starts with a step.</div>
         </div>
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row mb-10">
         <div className="basis-2/3 text-right ">
           <div className="inline-block max-w-prose">🎨 Collect <span className="text-green-500">Unique Stamps</span> From quaint towns to bustling cities, gather stamps that symbolize your experiences and the <span className="text-purple-500">memories you've crafted</span>.</div>
         </div>
@@ -36,6 +36,7 @@ export function LandingPage() {
           <img src="https://res.cloudinary.com/diwycpzwa/image/upload/v1691734794/PassportGlobal/landing-info-2.png" alt="" className="inline-block" />
         </div>
       </div>
+      <img src="https://res.cloudinary.com/diwycpzwa/image/upload/v1691734794/PassportGlobal/landing-footer.png" alt="" className="mt-36 mx-auto" />
     </>
   );
 
