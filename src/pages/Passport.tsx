@@ -35,7 +35,7 @@ export function PassportPage() {
             </div>
           </div>
           <div className="mt-10">
-            <button className="btn bg-black text-white border-purple-500 border-4 w-48">Request a Stamp</button>
+            <button className="btn bg-black text-white border-purple-500 border-4 w-48" onClick={() => navigate('/qr-make')}>Request a Stamp</button>
           </div>
           {/* TODO */}
           <div className="hidden mt-5">

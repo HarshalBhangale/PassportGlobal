@@ -23,24 +23,25 @@ export function Locator() {
   }
   function makeUrl() {
     const { lat, lng } = value;
-    return `${window.location.origin}/stamp?lat=${lat}&lng=${lng}`;
+    return `${window.location.origin}/qr-scan?lat=${lat}&lng=${lng}`;
   }
   if (!imported) {
     return <div>Loading...</div>;
   }
   return (
     <>
+      <label className="label">Search for a place:</label>
       <PlacesAutocomplete
         value={query}
         onChange={setQuery}
         onSelect={(value: string) => { setQuery(value); selectAddress(value); }}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="dropdown block mx-auto">
+          <div className="dropdown block wd-full">
             <input
               {...getInputProps()}
-              placeholder='Search Places ...'
-              className='w-full py-2 pl-3 pr-10 text-sm leading-5 border-2'
+              placeholder='Start typing and then choose...'
+              className='input w-full'
             />
               {loading && <div>Loading...</div>}
               {
@@ -60,9 +61,13 @@ export function Locator() {
       </PlacesAutocomplete>
       {
         value && (
-          <a href={makeUrl()} target="_blank" className="block bg-white p-5">
-            <QRCode className="mx-auto" value={makeUrl()} />
-          </a>
+          <div className="text-center mt-20 mb-10">
+            <a href={makeUrl()} target="_blank" className="inline-block bg-white p-5 mb-5">
+              <QRCode className="mx-auto" value={makeUrl()} />
+            </a>
+            <div>Latitude: {value.lat}</div>
+            <div>Longitude: {value.lng}</div>
+          </div>
         )
       }
     </>
