@@ -11,13 +11,14 @@ export function Locator() {
   async function selectAddress(address: string) {
     const [result] = await geocodeByAddress(address);
     const { lat, lng } = await getLatLng(result);
-    setValue({ lat, lng });
+    const { long_name: country } = result.address_components.find(({ types }) => types.includes('country'));
+    setValue({ country, lat, lng });
   }
   function makeUrl() {
-    const { lat, lng } = value;
+    const { country, lat, lng } = value;
     const url = new URL(`${window.location.origin}/qr-scan`);
     url.searchParams.set('target', account.address);
-    url.searchParams.set('place', query);
+    url.searchParams.set('country', country);
     url.searchParams.set('lat', lat);
     url.searchParams.set('lng', lng);
     return url.toString();
