@@ -26,7 +26,7 @@ contract PassportNFTTest is Test {
 
   function testUserCanCreatePassport() external passportMinted {
     assertEq(passportGlobal.balanceOf(USER), 1);
-    assertEq(passportGlobal.ownerOf(0), USER);
+    assertEq(passportGlobal.ownerOf(1), USER);
   }
 
   function testUserCanOnlyCreatePassportOnce() external passportMinted {
@@ -47,7 +47,7 @@ contract PassportNFTTest is Test {
       )
     );
     vm.prank(USER);
-    passportGlobal.transferFrom(USER, ANOTHER_USER, 0);
+    passportGlobal.transferFrom(USER, ANOTHER_USER, 1);
   }
 
   function testUserCanDeletePassport() external passportMinted {
