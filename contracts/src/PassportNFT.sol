@@ -25,7 +25,10 @@ contract PassportGlobal is ERC721 {
   mapping(uint256 => User) private PassportIdToUser;
 
   /** constructor */
-  constructor() ERC721("PassportGlobal", "PPG") {}
+  constructor() ERC721("PassportGlobal", "PPG") {
+    // reserve token id 0 for no passport
+    _tokenIdCounter.increment();
+  }
 
   /** External functions */
 
@@ -33,7 +36,7 @@ contract PassportGlobal is ERC721 {
     string calldata name,
     string calldata description
   ) external {
-    if (hasPassport(msg.sender)) {
+    if (hasPassport()) {
       revert PassportGlobal__AddressCanOnlyMintOnce(msg.sender);
     }
     PassportIdToUser[_tokenIdCounter.current()] = User({
@@ -48,6 +51,7 @@ contract PassportGlobal is ERC721 {
     _burn(UserToPassportId[msg.sender]);
 
     delete UserToPassportId[msg.sender];
+    delete PassportIdToUser[UserToPassportId[msg.sender]];
   }
 
   /** View functions */
@@ -55,8 +59,8 @@ contract PassportGlobal is ERC721 {
     return UserToPassportId[msg.sender];
   }
 
-  function hasPassport(address addr) public view returns (bool) {
-    return balanceOf(addr) > 0;
+  function hasPassport() public view returns (bool) {
+    return balanceOf(msg.sender) > 0;
   }
 
   function getPassport()
