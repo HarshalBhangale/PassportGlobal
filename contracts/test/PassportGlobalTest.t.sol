@@ -70,7 +70,7 @@ contract PassportNFTTest is Test {
       string memory name,
       uint256 issuanceTimestamp,
       string memory description
-    ) = passportGlobal.getPassport();
+    ) = passportGlobal.getPassport(USER);
 
     assertEq(name, NAME);
     assertEq(issuanceTimestamp, block.timestamp);

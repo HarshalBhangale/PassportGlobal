@@ -31,12 +31,11 @@ contract PassportGlobal is ERC721 {
   }
 
   /** External functions */
-
   function createPassport(
     string calldata name,
     string calldata description
   ) external {
-    if (hasPassport()) {
+    if (hasPassport(msg.sender)) {
       revert PassportGlobal__AddressCanOnlyMintOnce(msg.sender);
     }
     PassportIdToUser[_tokenIdCounter.current()] = User({
@@ -55,22 +54,24 @@ contract PassportGlobal is ERC721 {
   }
 
   /** View functions */
-  function getPassportId() external view returns (uint256) {
-    return UserToPassportId[msg.sender];
+  function getPassportId(address user) external view returns (uint256) {
+    return UserToPassportId[user];
   }
 
-  function hasPassport() public view returns (bool) {
-    return balanceOf(msg.sender) > 0;
+  function hasPassport(address user) public view returns (bool) {
+    return UserToPassportId[user] != 0;
   }
 
-  function getPassport()
+  function getPassport(
+    address user
+  )
     external
     view
     returns (string memory name, uint256 issueDate, string memory description)
   {
-    uint256 passportId = UserToPassportId[msg.sender];
-    User memory user = PassportIdToUser[passportId];
-    return (user.name, user.issueDate, user.description);
+    uint256 passportId = UserToPassportId[user];
+    User memory data = PassportIdToUser[passportId];
+    return (data.name, data.issueDate, data.description);
   }
 
   /** Internal/Private functions */
@@ -78,7 +79,6 @@ contract PassportGlobal is ERC721 {
     uint256 tokenId = _tokenIdCounter.current();
     _tokenIdCounter.increment();
     _safeMint(to, tokenId);
-
     UserToPassportId[to] = tokenId;
   }
 
