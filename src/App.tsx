@@ -16,11 +16,11 @@ export function App() {
         <Routes>
           <Route path="/" element={<Layout />} >
             <Route index element={<PassportPage />} />
-            <Route path="passport-form" element={<PassportFormPage />} />
+            <Route path="create-passport" element={<CreatePassportPage />} />
             <Route path="qr-scan" element={<QRScanPage />} />
             <Route path="search" element={<SearchPage />} />
-            <Route path="create-passport" element={<CreatePassportPage></CreatePassportPage>} />
-            <Route path="*" element={<LandingPage />} />
+            <Route path="create-passport" element={<CreatePassportPage />} />
+            <Route path="*" element={<PassportPage />} />
           </Route>
         </Routes>
       </>
@@ -29,7 +29,8 @@ export function App() {
     return (
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index path="/" element={<LandingPage />} />
+          <Route index element={<LandingPage />} />
+          <Route path="*" element={<LandingPage />} />
         </Route>
       </Routes>
     )
