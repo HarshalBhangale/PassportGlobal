@@ -6,10 +6,17 @@ export function Layout() {
 
   return (
     <>
-      <h1>Layout</h1>
+      <div className="flex">
+        <div className="w-full h-150px bg-black flex items-center justify-center" style={{ height: "150px" }}>
+          <img src="./assets/PassportGlobal-logos_white.png" alt="Description of Image" style={{ maxHeight: "200px" }} />
+        </div>
+      </div>
 
-      <ConnectButton />
-
+      <div className="w-full h-150px bg-black flex items-center justify-center pb-6">
+        <div className="flex">
+          <ConnectButton />
+        </div>
+      </div>
       <Outlet />
 
     </>
