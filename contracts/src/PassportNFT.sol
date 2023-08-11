@@ -13,7 +13,7 @@ contract PassportGlobal is ERC721 {
     uint256 issueDate;
     string description;
   }
-  
+
   /** Errors */
   error PassportGlobal__NotTransferable();
   error PassportGlobal__AddressCanOnlyMintOnce(address addr);
@@ -28,18 +28,6 @@ contract PassportGlobal is ERC721 {
   constructor() ERC721("PassportGlobal", "PPG") {}
 
   /** External functions */
-
-  function createPassport() external {
-    if (balanceOf(msg.sender) > 0) {
-      revert PassportGlobal__AddressCanOnlyMintOnce(msg.sender);
-    }
-    safeMint(msg.sender);
-  }
-
-  /** View functions */
-  function hasPassport(address addr) external view returns (bool) {
-    return balanceOf(addr) > 0;
-  }
 
   function createPassport(
     string calldata name,
