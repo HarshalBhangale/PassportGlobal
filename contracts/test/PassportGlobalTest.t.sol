@@ -18,16 +18,16 @@ contract PassportNFTTest is Test {
 
   modifier passportMinted() {
     vm.prank(USER);
-    passportGlobal.mint();
+    passportGlobal.createPassport();
     _;
   }
 
-  function testUserCanMintPassport() external passportMinted {
+  function testUserCanCreatePassport() external passportMinted {
     assertEq(passportGlobal.balanceOf(USER), 1);
     assertEq(passportGlobal.ownerOf(0), USER);
   }
 
-  function testUserCanOnlyMintOnce() external passportMinted {
+  function testUserCanOnlyCreatePassportOnce() external passportMinted {
     vm.expectRevert(
       abi.encodeWithSelector(
         PassportGlobal.PassportGlobal__AddressCanOnlyMintOnce.selector,
@@ -35,7 +35,7 @@ contract PassportNFTTest is Test {
       )
     );
     vm.prank(USER);
-    passportGlobal.mint();
+    passportGlobal.createPassport();
   }
 
   function testUserCannotTransferPassport() external passportMinted {
