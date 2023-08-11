@@ -12,11 +12,6 @@ export function Layout() {
         </div>
       </div>
 
-      <div className="w-full h-150px bg-black flex items-center justify-center pb-6">
-        <div className="flex">
-          <ConnectButton />
-        </div>
-      </div>
       <Outlet />
 
     </>
