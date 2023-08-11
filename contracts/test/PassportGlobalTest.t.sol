@@ -8,6 +8,8 @@ contract PassportNFTTest is Test {
   PassportGlobal passportGlobal;
   address USER = makeAddr("user");
   address ANOTHER_USER = makeAddr("another user");
+  string constant NAME = "name";
+  string constant DESCRIPTION = "description";
 
   uint256 constant STARTING_AMOUNT = 1 ether;
 
@@ -18,7 +20,7 @@ contract PassportNFTTest is Test {
 
   modifier passportMinted() {
     vm.prank(USER);
-    passportGlobal.createPassport();
+    passportGlobal.createPassport(NAME, DESCRIPTION);
     _;
   }
 
@@ -35,7 +37,7 @@ contract PassportNFTTest is Test {
       )
     );
     vm.prank(USER);
-    passportGlobal.createPassport();
+    passportGlobal.createPassport(NAME, DESCRIPTION);
   }
 
   function testUserCannotTransferPassport() external passportMinted {
@@ -46,5 +48,32 @@ contract PassportNFTTest is Test {
     );
     vm.prank(USER);
     passportGlobal.transferFrom(USER, ANOTHER_USER, 0);
+  }
+
+  function testUserCanDeletePassport() external passportMinted {
+    vm.prank(USER);
+    passportGlobal.deletePassport();
+    assertEq(passportGlobal.balanceOf(USER), 0);
+  }
+
+  function testUserCanCreatePassportAfterDeleting() external passportMinted {
+    vm.prank(USER);
+    passportGlobal.deletePassport();
+    vm.prank(USER);
+    passportGlobal.createPassport(NAME, DESCRIPTION);
+    assertEq(passportGlobal.balanceOf(USER), 1);
+  }
+
+  function testUserInfoIsCorrect() external passportMinted {
+    vm.prank(USER);
+    (
+      string memory name,
+      uint256 issuanceTimestamp,
+      string memory description
+    ) = passportGlobal.getPassport();
+
+    assertEq(name, NAME);
+    assertEq(issuanceTimestamp, block.timestamp);
+    assertEq(description, DESCRIPTION);
   }
 }

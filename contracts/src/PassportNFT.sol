@@ -7,6 +7,13 @@ import {Counters} from "@openzeppelin/contracts/utils/Counters.sol";
 contract PassportGlobal is ERC721 {
   using Counters for Counters.Counter;
 
+  /** Type declarations */
+  struct User {
+    string name;
+    uint256 issueDate;
+    string description;
+  }
+
   /** Errors */
   error PassportGlobal__NotTransferable();
   error PassportGlobal__AddressCanOnlyMintOnce(address addr);
@@ -14,20 +21,51 @@ contract PassportGlobal is ERC721 {
   /** State variables */
   Counters.Counter private _tokenIdCounter;
 
+  mapping(address => uint256) private UserToPassportId;
+  mapping(uint256 => User) private PassportIdToUser;
+
   /** constructor */
   constructor() ERC721("PassportGlobal", "PPG") {}
 
   /** External functions */
-  function createPassport() external {
-    if (balanceOf(msg.sender) > 0) {
+  function createPassport(
+    string calldata name,
+    string calldata description
+  ) external {
+    if (hasPassport(msg.sender)) {
       revert PassportGlobal__AddressCanOnlyMintOnce(msg.sender);
     }
+    PassportIdToUser[_tokenIdCounter.current()] = User({
+      name: name,
+      issueDate: block.timestamp,
+      description: description
+    });
     safeMint(msg.sender);
   }
 
+  function deletePassport() external {
+    _burn(UserToPassportId[msg.sender]);
+
+    delete UserToPassportId[msg.sender];
+  }
+
   /** View functions */
-  function hasPassport(address addr) external view returns (bool) {
+  function getPassportId() external view returns (uint256) {
+    return UserToPassportId[msg.sender];
+  }
+
+  function hasPassport(address addr) public view returns (bool) {
     return balanceOf(addr) > 0;
+  }
+
+  function getPassport()
+    external
+    view
+    returns (string memory name, uint256 issueDate, string memory description)
+  {
+    uint256 passportId = UserToPassportId[msg.sender];
+    User memory user = PassportIdToUser[passportId];
+    return (user.name, user.issueDate, user.description);
   }
 
   /** Internal/Private functions */
@@ -35,6 +73,7 @@ contract PassportGlobal is ERC721 {
     uint256 tokenId = _tokenIdCounter.current();
     _tokenIdCounter.increment();
     _safeMint(to, tokenId);
+    UserToPassportId[to] = tokenId;
   }
 
   ///@dev this makes the token non-transferable
