@@ -35,10 +35,10 @@ export function PassportPage() {
               <div>ID: {Number(passportId)}</div>
             </div>
           </div>
-          <div className="text-black bg-yellow-100 inline-block max-w-92">
+          <div className="text-black bg-yellow-200 inline-block max-w-92">
             <StampListing address={account.address}/>
           </div>
-          <div className="mt-10">
+          <div className="mt-10 mb-10">
             <button className="btn bg-black text-white border-purple-500 border-4 w-48" onClick={() => navigate('/qr-make')}>Request a Stamp</button>
           </div>
           {/* TODO */}
