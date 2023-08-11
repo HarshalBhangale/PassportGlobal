@@ -5,6 +5,7 @@ import { PassportPage } from "./pages/Passport";
 import { PassportFormPage } from "./pages/PassportForm";
 import { QRScanPage } from "./pages/QRScan";
 import { SearchPage } from "./pages/Search";
+import { CreatePassportPage } from "./pages/CreatePassport";
 
 export function App() {
 
@@ -17,6 +18,7 @@ export function App() {
           <Route path="passport-form" element={<PassportFormPage />} />
           <Route path="qr-scan" element={<QRScanPage />} />
           <Route path="search" element={<SearchPage />} />
+          <Route path="create-passport" element={<CreatePassportPage></CreatePassportPage>} />
           <Route path="*" element={<LandingPage />} />
         </Route>
       </Routes>

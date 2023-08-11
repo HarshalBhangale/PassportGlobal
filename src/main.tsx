@@ -1,5 +1,5 @@
 import "@rainbow-me/rainbowkit/styles.css";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { WagmiConfig } from "wagmi";
@@ -19,7 +19,13 @@ import { BrowserRouter } from "react-router-dom";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <WagmiConfig config={config}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider chains={chains} theme={darkTheme({
+        accentColor: '#ffd60a',
+        accentColorForeground: 'black',
+        borderRadius: 'small',
+        fontStack: 'system',
+        overlayBlur: 'small',
+      })}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
