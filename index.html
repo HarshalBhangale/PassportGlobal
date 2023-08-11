@@ -1,13 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Op Starter Project</title>
-    <script type="module" src="./polyfills.ts"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Op Starter Project</title>
+  <script type="module" src="./polyfills.ts"></script>
+  <style>
+    html,
+    body,
+    #root {
+      height: 100%;
+      max-height: 100%;
+      color: white;
+      background-color: black;
+    }
+
+    #root {
+      padding-bottom: 200px;
+    }
+
+    #footer {
+      position: relative;
+      height: 131px;
+      margin-top: -131px;
+      z-index: 100;
+      /*background-color: #F0F1E1;*/
+      text-align: center;
+    }
+
+    #footer>img {
+      display: inline-block;
+    }
+
+    #footer>.copyright {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: black;
+      padding: 0.5em 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <div id="footer">
+    <img src="https://res.cloudinary.com/diwycpzwa/image/upload/v1691734794/PassportGlobal/landing-footer.png" alt="" />
+    <div class="copyright">Made with 💖 at <a href="https://ethglobal.com/events/superhack" target="_blank">Ethglobal
+        Superhack</a></div>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
