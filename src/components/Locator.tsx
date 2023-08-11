@@ -36,7 +36,7 @@ export function Locator() {
         onSelect={(value: string) => { setQuery(value); selectAddress(value); }}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="dropdown px-5">
+          <div className="dropdown block mx-auto">
             <input
               {...getInputProps()}
               placeholder='Search Places ...'
@@ -60,9 +60,9 @@ export function Locator() {
       </PlacesAutocomplete>
       {
         value && (
-          <div className="bg-white p-5">
-            <QRCode value={makeUrl()} />
-          </div>
+          <a href={makeUrl()} target="_blank" className="block bg-white p-5">
+            <QRCode className="mx-auto" value={makeUrl()} />
+          </a>
         )
       }
     </>

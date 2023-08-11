@@ -1,19 +1,13 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
 import { Outlet } from "react-router-dom";
+import { Header } from './Header';
 
 export function Layout() {
-
   return (
-    <>
-      <div className="flex">
-        <div className="w-full h-150px bg-black flex items-center justify-center" style={{ height: "150px" }}>
-          <img src="./assets/PassportGlobal-logos_white.png" alt="Description of Image" style={{ maxHeight: "200px" }} />
-        </div>
+    <div>
+      <Header />
+      <div className="container mx-auto px-4">
+        <Outlet />
       </div>
-
-      <Outlet />
-
-    </>
+    </div>
   );
 }
