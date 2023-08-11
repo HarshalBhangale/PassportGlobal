@@ -15,7 +15,7 @@ export function App() {
       <>
         <Routes>
           <Route path="/" element={<Layout />} >
-            <Route index path="passport" element={<PassportPage />} />
+            <Route index element={<PassportPage />} />
             <Route path="passport-form" element={<PassportFormPage />} />
             <Route path="qr-scan" element={<QRScanPage />} />
             <Route path="search" element={<SearchPage />} />
