@@ -19,7 +19,6 @@ export function CreatePassportPage() {
     hash: data?.hash,
     onSuccess: () => navigate('/'),
   });
-  console.log(isCreating, isWaiting);
   if (isWaiting) {
     return <ProcessingMessage hash={data?.hash} />;
   }
