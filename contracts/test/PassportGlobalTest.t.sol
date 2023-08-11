@@ -7,7 +7,7 @@ import {PassportGlobal} from "../src/PassportNFT.sol";
 contract PassportNFTTest is Test {
   PassportGlobal passportGlobal;
   address USER = makeAddr("user");
-  address ANOTHER_USER = makeAddr("another user");
+  address ANOTHER_USER = makeAddr("another user")
   string constant NAME = "name";
   string constant DESCRIPTION = "description";
 
@@ -49,7 +49,7 @@ contract PassportNFTTest is Test {
     vm.prank(USER);
     passportGlobal.transferFrom(USER, ANOTHER_USER, 0);
   }
-
+  
   function testUserCanDeletePassport() external passportMinted {
     vm.prank(USER);
     passportGlobal.deletePassport();
