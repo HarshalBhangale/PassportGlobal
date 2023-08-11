@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAccount } from "wagmi";
 
 export function LandingPage() {
+
+  const { isConnected } = useAccount();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (isConnected) {
+      navigate("/passport");
+    }
+  }, [isConnected])
 
   return (
     <>
@@ -10,7 +22,7 @@ export function LandingPage() {
           <h1 className="text-2xl font-bold mb-2">Travel, Collect and Play <span className="text-green-500">with stamps</span> On <span className="text-purple-500">PassportGlobal</span></h1>
           <div className="inline-block max-w-prose">
             Embrace new adventures, collect unique stamps from every destination,
-            and share your travel tales with the world.<br/>
+            and share your travel tales with the world.<br />
             Your journey, your story. 🌏🎨📲</div>
         </div>
         <div className="basis-1/3 pl-5">
