@@ -27,14 +27,9 @@ export default defineConfig({
      */
     foundry({
       deployments: {
-        AttestationStation: {
-          [chains.optimism.id]: ATTESTATION_STATION_ADDRESS,
-          [chains.optimismGoerli.id]: ATTESTATION_STATION_ADDRESS,
-          [chains.foundry.id]: ATTESTATION_STATION_ADDRESS,
-        },
         PassportGlobal: {
           [chains.optimismGoerli.id]:
-            "0x0D10F720B5854704A311DB07C39F872847e0Bb56",
+            "0x3960596FAD660667f381b8428dFc9A95D28C481C",
         },
       },
     }),

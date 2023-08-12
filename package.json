@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "anvil": "source .env && anvil --fork-url $ANVIL_FORK_URL --chain-id $ANVIL_CHAIN_ID",
-    "deploy": "source .env && forge create contracts/src/PassportNFT.sol:PassportGlobal --rpc-url $FORGE_RPC_URL --private-key $FORGE_PRIVATE_KEY --etherscan-api-key $ETHERSCAN_API_KEY --verify",
-    "deploy:anvil": "source .env && forge create contracts/src/AttestationStation.sol:AttestationStation --rpc-url http://127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --legacy",
+    "deploy": "source .env && forge script contracts/script/DeployPassportNFT.s.sol --rpc-url $FORGE_RPC_URL --broadcast --private-key $FORGE_PRIVATE_KEY --verify --etherscan-api-key $ETHERSCAN_API_KEY",
     "dev": "npm run wagmi && vite",
     "dev:foundry": "npm run dev & wagmi generate --watch & npm run anvil",
     "build": "npm run wagmi && vite build",
@@ -20,6 +19,8 @@
     "@eth-optimism/contracts-bedrock": "^0.12.1",
     "@eth-optimism/contracts-periphery": "^1.0.7",
     "@eth-optimism/sdk": "0.0.0-20230301065104",
+    "@ethereum-attestation-service/eas-contracts": "^1.0.0-beta.0",
+    "@ethereum-attestation-service/eas-sdk": "^1.0.0-beta.0",
     "@googlemaps/js-api-loader": "^1.16.2",
     "@openzeppelin/contracts": "4.7.3",
     "@openzeppelin/contracts-upgradeable": "4.7.3",
