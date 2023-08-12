@@ -26,13 +26,10 @@ contract PassportGlobal is ERC721, StampAttester {
   mapping(uint256 => User) private PassportIdToUser;
 
   /** constructor */
-  constructor()
-    ERC721("PassportGlobal", "PPG")
-    StampAttester(
-      0x4200000000000000000000000000000000000021, // TODO: make this dymamic
-      0x4cd28cb0df7781390ccdf919b8854daa9e34ebbe6e2f7724980b7f0ddbb38ed3 // TODO: make dynamic too
-    )
-  {
+  constructor(
+    address eas,
+    bytes32 stampSchemaUID
+  ) ERC721("PassportGlobal", "PPG") StampAttester(eas, stampSchemaUID) {
     // reserve token id 0 for no passport
     _tokenIdCounter.increment();
   }

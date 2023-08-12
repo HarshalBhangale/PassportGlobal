@@ -3,6 +3,7 @@ pragma solidity ^0.8.9;
 
 import {Test} from "forge-std/Test.sol";
 import {PassportGlobal} from "../src/PassportNFT.sol";
+import {DeployPassportNFT} from "../script/DeployPassportNFT.s.sol";
 
 contract PassportNFTTest is Test {
   PassportGlobal passportGlobal;
@@ -14,7 +15,8 @@ contract PassportNFTTest is Test {
   uint256 constant STARTING_AMOUNT = 1 ether;
 
   function setUp() external {
-    passportGlobal = new PassportGlobal();
+    DeployPassportNFT deployPassportNFT = new DeployPassportNFT();
+    passportGlobal = deployPassportNFT.run();
     vm.deal(USER, STARTING_AMOUNT);
   }
 

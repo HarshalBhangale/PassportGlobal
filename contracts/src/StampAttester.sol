@@ -26,8 +26,7 @@ contract StampAttester {
     address recipient,
     uint256 lng,
     uint256 lat,
-    string calldata country,
-    uint24 cityCode
+    string calldata country
   ) external returns (bytes32) {
     return
       _eas.attest(
@@ -38,7 +37,7 @@ contract StampAttester {
             expirationTime: NO_EXPIRATION_TIME, // No expiration time
             revocable: false,
             refUID: EMPTY_UID, // No references UI
-            data: abi.encode(lng, lat, country, cityCode, block.timestamp), // Encode all the data
+            data: abi.encode(lng, lat, country, block.timestamp), // Encode all the data
             value: 0 // No value/ETH
           })
         })
