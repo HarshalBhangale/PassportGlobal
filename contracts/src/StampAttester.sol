@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-import {IEAS, AttestationRequest, AttestationRequestData} from "@ethereum-attestation-service/eas-contracts/contracts/IEAS.sol";
+import {IEAS, AttestationRequest, AttestationRequestData, Attestation} from "@ethereum-attestation-service/eas-contracts/contracts/IEAS.sol";
 import {NO_EXPIRATION_TIME, EMPTY_UID} from "@ethereum-attestation-service/eas-contracts/contracts/Common.sol";
 
 contract StampAttester {
@@ -42,5 +42,26 @@ contract StampAttester {
           })
         })
       );
+  }
+
+  function getAttestation(
+    bytes32 attestationUID
+  )
+    external
+    view
+    returns (
+      address recipient,
+      uint256 lng,
+      uint256 lat,
+      string memory country,
+      uint256 timestamp
+    )
+  {
+    Attestation memory attestation = _eas.getAttestation(attestationUID);
+    recipient = attestation.recipient;
+    (lng, lat, country, timestamp) = abi.decode(
+      attestation.data,
+      (uint256, uint256, string, uint256)
+    );
   }
 }
