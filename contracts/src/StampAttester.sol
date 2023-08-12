@@ -22,14 +22,14 @@ contract StampAttester {
     _eas = IEAS(eas);
   }
 
-  function grantStamp(
+  function makeAttestation(
     address recipient,
     uint256 lng,
     uint256 lat,
     string calldata country
-  ) external returns (bytes32) {
+  ) internal returns (bytes32 attestationUID) {
     return
-      _eas.attest(
+      attestationUID = _eas.attest(
         AttestationRequest({
           schema: stampSchemaUID,
           data: AttestationRequestData({

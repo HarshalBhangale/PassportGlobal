@@ -13,6 +13,7 @@ contract PassportGlobal is ERC721, StampAttester {
     string name;
     uint256 issueDate;
     string description;
+    bytes32[] stampAttestions;
   }
 
   /** Errors */
@@ -45,7 +46,8 @@ contract PassportGlobal is ERC721, StampAttester {
     PassportIdToUser[_tokenIdCounter.current()] = User({
       name: name,
       issueDate: block.timestamp,
-      description: description
+      description: description,
+      stampAttestions: new bytes32[](0)
     });
     safeMint(msg.sender);
   }
@@ -55,6 +57,17 @@ contract PassportGlobal is ERC721, StampAttester {
 
     delete UserToPassportId[msg.sender];
     delete PassportIdToUser[UserToPassportId[msg.sender]];
+  }
+
+  function grantStamp(
+    address recipient,
+    uint256 lng,
+    uint256 lat,
+    string calldata country
+  ) external returns (bytes32 attestationUID) {
+    attestationUID = makeAttestation(recipient, lng, lat, country);
+    uint256 passportId = UserToPassportId[recipient];
+    PassportIdToUser[passportId].stampAttestions.push(attestationUID);
   }
 
   /** View functions */
@@ -76,6 +89,14 @@ contract PassportGlobal is ERC721, StampAttester {
     uint256 passportId = UserToPassportId[user];
     User memory data = PassportIdToUser[passportId];
     return (data.name, data.issueDate, data.description);
+  }
+
+  function getStamps(
+    address user
+  ) external view returns (bytes32[] memory stamps) {
+    uint256 passportId = UserToPassportId[user];
+    User memory data = PassportIdToUser[passportId];
+    return data.stampAttestions;
   }
 
   /** Internal/Private functions */
