@@ -31,6 +31,7 @@ export default defineConfig({
           [chains.optimismGoerli.id]:
             "0xe30Ac30A50805F26217b7c1A1aC958d4D5e6C26e",
           [chains.baseGoerli.id]: "0xC2409ca19cc56D2Cd69142073d5BCAA211Dcb5F3",
+          [chains.zoraTestnet.id]: "0x7775480ED167a1A1c56653f3c8149A11c51d1E6B",
         },
       },
     }),
