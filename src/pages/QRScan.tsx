@@ -34,16 +34,21 @@ export function QRScanPage() {
     const [name] = passport;
     return (
       <div className="text-center pt-10">
-        <div className="text-2xl">Do you confirm meeting <span className="text-green-500">{name}</span> in <span className="text-purple-500">{country}</span>?</div>
         {grantStampPreparing && <div className="mt-4">Just a moment…</div>}
         {grantStampDoing && <div className="mt-4">Granting a stamp…</div>}
         {grantStampWaiting && <div className="mt-4">Confirming the transaction on chain…</div>}
-        <div className="mt-20">
-          <button className="btn btn-lg bg-yellow-500 text-black w-52" onClick={grantStamp} disabled={grantStampPreparing || grantStampDoing || grantStampWaiting}>Yes we've met</button>
-        </div>
-        <div className="mt-10">
-          <button className="btn btn-lg bg-red-500 text-white w-52" onClick={() => navigate('/')} disabled={grantStampPreparing || grantStampDoing || grantStampWaiting}>No (Cancel)</button>
-        </div>
+        {
+          !(grantStampPreparing || grantStampDoing || grantStampWaiting) &&
+          <>
+            <div className="text-2xl">Do you confirm meeting <span className="text-green-500">{name}</span> in <span className="text-purple-500">{country}</span>?</div>
+            <div className="mt-20">
+              <button className="btn btn-lg bg-yellow-500 text-black w-52" onClick={grantStamp}>Yes we've met</button>
+            </div>
+            <div className="mt-10">
+              <button className="btn btn-lg bg-red-500 text-white w-52" onClick={() => navigate('/')}>No (Cancel)</button>
+            </div>
+          </>
+        }
       </div>
     );
   }

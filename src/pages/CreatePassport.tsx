@@ -11,16 +11,13 @@ export function CreatePassportPage() {
   const { config } = usePreparePassportGlobalCreatePassport({
     args: [name, bio],
   });
-  const { data, write: createPassport, isLoading: isCreating } = usePassportGlobalCreatePassport({
-    ...config,
-    // onSuccess: () => {},
-  });
+  const { data, write: createPassport, isLoading: isCreating } = usePassportGlobalCreatePassport(config);
   const { isLoading: isWaiting } = useWaitForTransaction({
     hash: data?.hash,
     onSuccess: () => navigate('/'),
   });
   if (isWaiting) {
-    return <ProcessingMessage hash={data?.hash} />;
+    return <div className="text-center"><ProcessingMessage hash={data?.hash} /></div>;
   }
   return (
     <>
@@ -49,7 +46,7 @@ export function CreatePassportPage() {
           </div>
           <div className="row">
             <div className="text-center mb-4">
-              {isCreating && <div><ProcessingMessage hash={data?.hash} /></div>}
+              {isCreating && <ProcessingMessage hash={data?.hash} />}
               <div>
                 Gas fee: <span>{config.request?.gas?.toString() ?? 'N/A'}</span>
               </div>
