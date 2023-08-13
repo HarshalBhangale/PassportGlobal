@@ -8,13 +8,13 @@ import { WorldCoinConnect } from '../components/WorldCoinConnect';
 export function PassportPage() {
   const account = useAccount();
   const navigate = useNavigate();
-  const { data: hasPassport, isLoading: hasPassportLoading } = usePassportGlobalHasPassport({
+  const { data: hasPassport, isFetching: hasPassportLoading }  = usePassportGlobalHasPassport({
     args: [account.address!],
   });
-  const { data: passport, isLoading: passportLoading } = usePassportGlobalGetPassport({
+  const { data: passport, isFetching: passportLoading } = usePassportGlobalGetPassport({
     args: [account.address!],
   });
-  const { data: passportId, isLoading: passportIdLoading } = usePassportGlobalGetPassportId({
+  const { data: passportId, isFetching: passportIdLoading } = usePassportGlobalGetPassportId({
     args: [account.address!],
   });
   useEffect(() => {
@@ -28,12 +28,8 @@ export function PassportPage() {
       const dateStr = new Date(Number(timestamp) * 1000).toLocaleDateString();
       return (
         <div className="text-center max-w-92">
+          <div className="mx-auto"><WorldCoinConnect /></div>
           <div className="relative mx-auto">
-
-            <div>
-              <WorldCoinConnect />
-            </div>
-
             <img src="https://res.cloudinary.com/diwycpzwa/image/upload/v1691740929/PassportGlobal/passport.png" alt="" className="inline-block" />
             <div className="text-black absolute" style={{ left: '0', right: '0', top: '150px' }}>Issued on {dateStr}</div>
             <div className="text-white absolute" style={{ left: '0', right: '0', bottom: '33px' }}>
