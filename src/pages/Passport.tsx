@@ -8,7 +8,7 @@ import { WorldCoinConnect } from '../components/WorldCoinConnect';
 export function PassportPage() {
   const account = useAccount();
   const navigate = useNavigate();
-  const { data: hasPassport, isFetching: hasPassportLoading }  = usePassportGlobalHasPassport({
+  const { data: hasPassport, isFetching: hasPassportLoading } = usePassportGlobalHasPassport({
     args: [account.address!],
   });
   const { data: passport, isFetching: passportLoading } = usePassportGlobalGetPassport({
@@ -37,7 +37,7 @@ export function PassportPage() {
               <div>ID: {Number(passportId)}</div>
             </div>
           </div>
-          <div className="text-black bg-yellow-200 inline-block max-w-92">
+          <div className="text-black inline-block max-w-92 my-8">
             <StampListing address={account.address} />
           </div>
           <div className="mt-10 mb-10">
