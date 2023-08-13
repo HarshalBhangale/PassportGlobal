@@ -1,5 +1,13 @@
 # PassportGlobal
 
+## Quickstart
+Conigure your `.env` variables as in `.env.example`.
+Then run:
+```
+npm run dev
+```
+to get it running on your local machine.
+
 ## How it works
 
 Bootsrapped with [Optimism Starter Kit](https://github.com/ethereum-optimism/optimism-starter).
