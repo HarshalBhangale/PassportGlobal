@@ -21,7 +21,6 @@ export function Stamp({ uid }) {
       args: [uid!],
     });
   if (!attestationLoading) {
-    console.log(attestation);
     const attestationArray = attestation?.toString().split(",");
     const attestationDateNumber = parseInt(attestationArray[4], 10);
     const attestationDate = new Date(attestationDateNumber * 1000);

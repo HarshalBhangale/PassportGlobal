@@ -7,12 +7,10 @@ export function WorldCoinConnect() {
   const [isVerified, setIsVerified] = React.useState(false);
 
   const onSuccess = (data: any) => {
-    console.log('onSuccess', data);
     setIsVerified(true);
   }
 
   const handleVerify = (data: any) => {
-    console.log('handleVerify', data);
   }
 
   return (
