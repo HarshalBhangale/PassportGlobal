@@ -6,6 +6,7 @@ export function StampListing({ address }) {
   const { data: uids } = usePassportGlobalGetStamps({
     args: [address!],
   });
+  console.log(uids);
 
   return (
     <>
