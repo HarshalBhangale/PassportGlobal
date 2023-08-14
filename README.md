@@ -1,4 +1,4 @@
-# PassportGlobal
+# PassportGlobal Mobile Friendly web app  
 
 ## Quickstart
 Conigure your `.env` variables as in `.env.example`.
