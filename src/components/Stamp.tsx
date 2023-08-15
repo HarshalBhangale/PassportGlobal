@@ -5,16 +5,11 @@ import { usePassportGlobalGetAttestation } from "../generated";
 import { useEnsName, useEnsAddress } from "wagmi";
 
 export function Stamp({ uid }) {
-  const country = "???"; //TODO: Fetch a real stamp data via EAS API (EAS SDK or wagmi generated API)
-
   const splitGuid = () => {
-    const midPoint = Math.floor(uid.length / 2);
-    return [uid.slice(0, midPoint - 6), uid.slice(midPoint - 5)];
+    return [uid.slice(0, 6), uid.slice(-4)];
   };
-
   const [firstHalf, secondHalf] = splitGuid();
   const [isCopied, setIsCopied] = useState(false);
-
   // // getAttestation
   const { data: attestation, isLoading: attestationLoading } =
     usePassportGlobalGetAttestation({
@@ -28,16 +23,14 @@ export function Stamp({ uid }) {
       <div className="m-10">
         <img
           src="../assets/world-travel-stamp.jpeg"
-          alt={`Stamp for ${country}`}
+          alt={`Stamp for ${attestationArray[3]}`}
           className="inline-block h-24"
         />
         <div className="text-center py-1">
           <div style={{ marginRight: "10px" }}>
             <div>
               <b>Attestation Uid: </b>
-              {firstHalf}
-              <br />
-              {secondHalf}
+              {firstHalf}...{secondHalf}
               <CopyToClipboard
                 text={uid}
                 onCopy={() => setIsCopied(true)}
@@ -51,8 +44,8 @@ export function Stamp({ uid }) {
             <div>
               <p>
                 <b>Recipient: </b>
-                {attestationArray[0].substring(0, 5)}...
-                {attestationArray[0].slice(-8)}
+                {attestationArray[0].substring(0, 6)}...
+                {attestationArray[0].slice(-4)}
                 <CopyToClipboard
                   text={attestationArray[0]}
                   onCopy={() => setIsCopied(true)}
@@ -74,7 +67,7 @@ export function Stamp({ uid }) {
               <b>Country/City:</b> {attestationArray[3]}
             </p>
             <p>
-              <b>Date:</b> {attestationDate.toLocaleString()}
+              <b>Date:</b> {attestationDate.toLocaleDateString()}
             </p>
           </div>
         </div>
